@@ -16,9 +16,6 @@ return new class extends Migration
         Schema::create('actions', function (Blueprint $table) {
             $table->id();
             $table->string('action')->unique();
-            $table->string('class');
-            $table->boolean('user');
-            $table->boolean('workspace');
         });
     }
 

@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\NotifyController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/notify',       NotifyController::class)
+    ->name('notify')
+    ->middleware('auth:portal');
+
+Route::post('/settings',     SettingsController::class)
+    ->name('settings.update')
+    ->middleware('auth:portal');

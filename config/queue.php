@@ -42,6 +42,22 @@ return [
             'after_commit' => false,
         ],
 
+        'sqs-sns' => [
+            'driver' => 'sqs-sns',
+            'key'    => env('AWS_SQS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SQS_SECRET_ACCESS_KEY'),
+            'queue'  => env('AWS_SQS_QUEUE', 'your-queue-url'),
+            'region' => env('AWS_SQS_REGION', 'us-east-2'),
+            'topic' => env('AWS_SNS_TOPIC'),
+            'routes' => [
+                env('AWS_SNS_TOPIC') => 'App\\Jobs\\SqsEventsJob',
+            ],
+            'version' => 'latest',
+            'ua_append' => [
+                'L5MOD/' . Aws\Laravel\AwsServiceProvider::VERSION,
+            ],
+        ],
+
         'beanstalkd' => [
             'driver' => 'beanstalkd',
             'host' => 'localhost',

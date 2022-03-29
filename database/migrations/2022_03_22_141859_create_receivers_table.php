@@ -13,17 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('notifiables', function (Blueprint $table) {
+
+        Schema::create('receivers', function (Blueprint $table) {
             $table->id();
-            $table->string('notifiable_id', 36);
-            $table->enum('notifiable_type', ['user', 'workspace']);
+            $table->string('receiver_id', 36);
+            $table->enum('receiver_type', ['User', 'Workspace']);
             $table->foreignId('action_id');
             $table->boolean('email');
-            $table->boolean('sms');
-            $table->boolean('browser');
+            $table->boolean('phone');
             $table->timestamps();
 
-            $table->unique(['notifiable_id', 'notifiable_type', 'action_id']);
+            $table->unique(['receiver_id', 'receiver_type', 'action_id']);
         });
     }
 
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notifiables');
+        Schema::dropIfExists('receivers');
     }
 };
